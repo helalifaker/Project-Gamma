@@ -1,0 +1,135 @@
+name: Feature Implementation
+description: Template for new feature implementation tickets
+title: "[Feature] "
+labels: ["feature", "needs-design"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Pre-Code Greenlight Checklist
+        
+        **This ticket cannot start until ALL boxes are checked:**
+        
+        ### Product Strategist
+        - [ ] Objective, scope, success metric defined
+        - [ ] Acceptance criteria (Given/When/Then) complete and testable
+        - [ ] Decision log updated and linked
+        - [ ] Dependencies sequenced and conflict-free
+        
+        ### Solution Architect
+        - [ ] Design & sequencing approved; Design Freeze Hash recorded
+        - [ ] Interface spec versioned and stub published
+        - [ ] Data model changes reviewed with rollback plan
+        - [ ] Non-functional constraints documented
+        
+        ### QA Specialist
+        - [ ] Test plan and traceability matrix updated
+        - [ ] Fixtures/golden samples ready
+        - [ ] Acceptance criteria mapped to test IDs
+        
+        ### DevOps & Release
+        - [ ] CI checks configured (lint, type, unit, contract)
+        - [ ] Secrets, flags, and environments provisioned
+        - [ ] Rollback/canary plan documented
+        
+        **✅ Greenlight to Code = all above boxes checked**
+
+  - type: input
+    id: design_freeze
+    attributes:
+      label: Design Freeze
+      description: Link to design document with commit hash
+      placeholder: "docs/design.md@abc123"
+    validations:
+      required: true
+
+  - type: input
+    id: interfaces
+    attributes:
+      label: Interface Specs
+      description: Link to interface specifications with version
+      placeholder: "contracts/api.yaml@v1.2.0"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: dependencies
+    attributes:
+      label: Dependency Readiness Levels (DRL)
+      description: All dependencies must be ≥ DRL-2 before coding starts
+      options:
+        - label: Business Requirements (DRL-2+)
+        - label: Design/Architecture (DRL-2+)
+        - label: Test Plans (DRL-2+)
+        - label: Environment Setup (DRL-3 for integration)
+        - label: Documentation (DRL-2+)
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria (Given/When/Then)
+      description: Write testable acceptance criteria in Gherkin format
+      placeholder: |
+        Given [context]
+        When [action]
+        Then [expected outcome]
+    validations:
+      required: true
+
+  - type: textarea
+    id: files_allowed
+    attributes:
+      label: Files Allowed to Change
+      description: List specific files/directories that may be modified
+      placeholder: |
+        - /app/versions/[id]/page.tsx
+        - /lib/utils/calculations.ts
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation_plan
+    attributes:
+      label: Implementation Plan
+      description: Outline steps, files, and dependencies before coding
+      placeholder: |
+        1. Step one
+        2. Step two
+        3. Step three
+
+  - type: textarea
+    id: assumptions
+    attributes:
+      label: Assumptions
+      description: List all assumptions with links to sources or mark BLOCKED
+      placeholder: |
+        - Assumption 1 (linked to source)
+        - Assumption 2 (BLOCKED - needs clarification)
+
+  - type: checkboxes
+    id: pre_code_checklist
+    attributes:
+      label: Pre-Code Checklist
+      options:
+        - label: Cite sources for every type/API
+        - label: Post implementation plan
+        - label: List assumptions + links
+        - label: Unit + contract tests planned
+        - label: Confidence ≥90% (if not, mark BLOCKED)
+
+  - type: textarea
+    id: confidence
+    attributes:
+      label: Confidence Assessment
+      description: State confidence level (≥90% or <90%) and reason
+      placeholder: "Confidence: ≥90% / <90% - [reason]"
+
+  - type: textarea
+    id: related_docs
+    attributes:
+      label: Related Documentation
+      description: Links to PRD, TSD, UI/UX docs, or other references
+      placeholder: |
+        - PRD_v1.4.md Section X
+        - TSD_v1.0.md Section Y
+
